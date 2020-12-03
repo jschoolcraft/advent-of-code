@@ -8,3 +8,4 @@ puts "https://adventofcode.com/#{year}/day/#{day}/input"
 `wget --no-cookies --header "Cookie: session=$SESSION" https://adventofcode.com/#{year}/day/#{day}/input -O #{formatted_day}/input.txt`
 
 `cp templates/* #{formatted_day}/.`
+`open https://adventofcode.com/#{year}/day/#{day}`
