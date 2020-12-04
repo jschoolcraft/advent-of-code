@@ -55,6 +55,6 @@ class TestDay03 < Minitest::Test
   def test_part_2
     input = File.read("./input.txt").split
 
-    assert_equal 4242, @solution.part2(input)
+    assert_equal 5872458240, @solution.part2(input)
   end
 end
