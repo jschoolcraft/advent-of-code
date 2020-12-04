@@ -60,9 +60,7 @@ module Year2020
     def has_tree?(row, depth, right, i)
       index = i * right
 
-      if index >= row.size
-        index = index % row.size
-      end
+      index = index % row.size
       row[index] == "#"
     end
   end
