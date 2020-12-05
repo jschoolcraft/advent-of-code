@@ -9,3 +9,4 @@ puts "https://adventofcode.com/#{year}/day/#{day}/input"
 
 `cp templates/* #{formatted_day}/.`
 `open https://adventofcode.com/#{year}/day/#{day}`
+`cd #{formatted_day}`
