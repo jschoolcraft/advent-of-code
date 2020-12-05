@@ -2,14 +2,14 @@ require "byebug"
 
 module Year2020
   class Day05
-    def row_number(pass, rows: 128)
+    def binary_search(input, rows:, upper_char:, lower_char:)
       upper = rows - 1
       lower = 0
       middle = (upper - lower)/ 2
 
-      pass.chars.first(7).each_with_index do |c|
+      input.each do |c|
         middle = ((upper - lower * 1.0)/ 2).ceil
-        if c == "F"
+        if c == lower_char
           upper -= middle
         else
           lower += middle
@@ -19,21 +19,12 @@ module Year2020
       lower
     end
 
-    def column_number(pass, rows: 8)
-      right = rows - 1
-      left = 0
-      middle = (right - left)/ 2
+    def row_number(pass, rows: 128)
+      binary_search(pass.chars.first(7), rows: rows, upper_char: "B", lower_char: "F")
+    end
 
-      pass.chars.last(3).each_with_index do |c|
-        middle = ((right - left * 1.0)/ 2).ceil
-        if c == "L"
-          right -= middle
-        else
-          left += middle
-        end
-        # puts format("%s -> left: %s, right: %s, middle: %s", c, left, right, middle)
-      end
-      left
+    def column_number(pass, rows: 8)
+      binary_search(pass.chars.last(3), rows: rows, upper_char: "R", lower_char: "L")
     end
 
     def seat_id(input)
