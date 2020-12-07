@@ -75,9 +75,8 @@ class TestDay07 < Minitest::Test
   end
 
   def test_part_2
-    skip
-    input = File.read("./input.txt").split
+    input = File.read("./input.txt").split(/\n/)
 
-    assert_equal 4242, @solution.part2(input)
+    assert_equal 0, @solution.part2(input, "shiny gold")
   end
 end

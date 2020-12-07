@@ -34,18 +34,18 @@ module Year2020
       updated << find_candidates(bags, updated)
     end
 
-    def find_bags(bags, colors)
-      # puts format("colors: %s", colors)
-      colors.map do |color|
-        if bags[color].keys
-          puts format("bags[color]: %s", bags[color])
-          bags[color].map do |c, q|
-            puts format("q: %s", q)
-            q.to_i * find_bags(bags, [c]).sum
-          end
-        else
-          return 1
-        end
+    def find_bags(bags, color)
+      # puts format("color: %s", color)
+      if bags[color].keys.size > 0
+        # puts format("bags[color]: %s", bags[color])
+        bags[color].map do |c, count|
+          # puts format("c: %s, count: %s", c, count)
+          # count.to_i * find_bags(bags, c)
+          count.to_i + (count.to_i * find_bags(bags, c))
+        end.sum
+      else
+        # puts "returning 1"
+        0
       end
     end
 
@@ -57,9 +57,8 @@ module Year2020
 
     def part2(input, color)
       bags = parse_rules(input)
-      puts bags[color]
-      buy = find_bags(bags, [color])
-      puts buy.inspect
+      buy = find_bags(bags, color)
+      buy
     end
   end
 end
