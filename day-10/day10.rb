@@ -33,15 +33,21 @@ module Year2020
 
     def part2(input)
       input = prep_input(input)
+      puts input.inspect
 
       pos = Hash.new(0)
       pos[0] = 1
 
       input.each do |i|
+        # puts format("i: %s", i)
         3.times do |j|
-          pos[i] += pos[i - j -1]
+          # puts format("j: %s", j)
+          pos[i] += pos[i - j - 1]
+          # puts format("pos[i]: %s, pos[i - j -1]: %s", pos[i], pos[i - j -1])
         end
       end
+
+      puts pos.inspect
       pos.values.max
     end
   end
