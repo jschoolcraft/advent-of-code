@@ -1,12 +1,15 @@
 year = Time.now.year
 day = Time.now.day
 formatted_day = "day-%02d" % day
+location = format("%s/%s", year, formatted_day)
+
+puts location
 
 puts "https://adventofcode.com/#{year}/day/#{day}/input"
 
-`mkdir -p #{formatted_day}`
-`wget --no-cookies --header "Cookie: session=$SESSION" https://adventofcode.com/#{year}/day/#{day}/input -O #{formatted_day}/input.txt`
+`mkdir -p #{location}`
+`wget --no-cookies --header "Cookie: session=$SESSION" https://adventofcode.com/#{year}/day/#{day}/input -O #{location}/input.txt`
 
-`cp templates/* #{formatted_day}/.`
+`cp templates/* #{location}/.`
 `open https://adventofcode.com/#{year}/day/#{day}`
-`cd #{formatted_day}`
+`cd #{location}`
