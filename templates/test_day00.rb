@@ -1,9 +1,9 @@
 require "minitest/autorun"
-require "./day00"
+require "./day<%= config[:day] %>"
 
-class TestDay00 < Minitest::Test
+class TestDay<%= config[:day] %> < Minitest::Test
   def setup
-    @solution = Year2020::Day00.new
+    @solution = Year<%= config[:year] %>::Day<%= config[:day] %>.new
   end
 
   def test_it_works

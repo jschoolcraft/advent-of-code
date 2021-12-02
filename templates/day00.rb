@@ -1,7 +1,7 @@
 require "byebug"
 
-module Year2020
-  class Day00
+module Year<%= config[:year] %>
+  class Day<%= config[:day] %>
     def part1(input)
       42
     end
