@@ -14,6 +14,8 @@ module Year2021
         previous = depth
       end
       inc
+      # An alternate one line implementation
+      # input.map(&:to_i).each_cons(2).select { |e| e.last > e.first }.size
     end
 
     def part2(input)
