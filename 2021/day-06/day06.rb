@@ -36,9 +36,5 @@ module Year2021
       end
       growth_cycle.values.sum
     end
-
-    def part2(input)
-      4242
-    end
   end
 end
