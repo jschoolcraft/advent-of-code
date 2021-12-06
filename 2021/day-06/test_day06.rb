@@ -6,10 +6,6 @@ class TestDay06 < Minitest::Test
     @solution = Year2021::Day06.new
   end
 
-  def test_it_works
-    assert true
-  end
-
   def test_sample_part_1
     input = <<~EOF
       3,4,3,1,2
@@ -30,12 +26,12 @@ class TestDay06 < Minitest::Test
       3,4,3,1,2
     EOF
 
-    assert_equal 26984457538, @solution.part1(input, 256)
+    assert_equal 26984457539, @solution.part1(input, 256)
   end
 
   def test_part_2
     input = File.read("./input.txt")
 
-    assert_equal 4242, @solution.part1(input, 256)
+    assert_equal 1634946868992, @solution.part1(input, 256)
   end
 end

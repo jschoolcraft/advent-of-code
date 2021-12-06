@@ -5,24 +5,36 @@ module Year2021
     def part1(input, days)
       fish = input.split(/,/).map(&:to_i)
 
+      growth_cycle = {
+        0 => 0,
+        1 => 0,
+        2 => 0,
+        3 => 0,
+        4 => 0,
+        5 => 0,
+        6 => 0,
+        7 => 0,
+        8 => 0,
+      }
+
+      fish.each { |f| growth_cycle[f] += 1 }
+
       0.upto(days - 1).each do |day|
-        new_fish = 0
+        growth_cycle = {
+          0 => growth_cycle[1],
+          1 => growth_cycle[2],
+          2 => growth_cycle[3],
+          3 => growth_cycle[4],
+          4 => growth_cycle[5],
+          5 => growth_cycle[6],
+          6 => growth_cycle[7],
+          7 => growth_cycle[8],
+          8 => growth_cycle[0],
+        }
 
-        fish = fish.map { |f| f - 1 }
-
-        fish = fish.map do |f|
-          if f < 0
-            new_fish += 1
-            6
-          else
-            f
-          end
-        end
-
-        new_fish.times { fish << 8 }
-        # puts format("After %2d days: %s", day + 1, fish)
+        growth_cycle[6] += growth_cycle[8]
       end
-      fish.size
+      growth_cycle.values.sum
     end
 
     def part2(input)
