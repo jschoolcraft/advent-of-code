@@ -29,23 +29,19 @@ class TestDay08 < Minitest::Test
     assert_equal 274, @solution.part1(input)
   end
 
-  def test_find_segments
-    segments = @solution.find_segments("acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab ")
+  def test_find_numbers
+    numbers = @solution.find_numbers("acedgfb cdfbe gcdfa fbcad dab cefabd cdfgeb eafb cagedb ab ")
 
-    assert_equal "d", segments["a"]
-    assert_equal "e", segments["b"]
-    assert_equal "a", segments["c"]
-    assert_equal "f", segments["d"]
-    assert_equal "g", segments["e"]
-    assert_equal "b", segments["f"]
-    assert_equal "c", segments["g"]
-  end
-
-  def test_segments_to_digits
-    mappings = {"e"=>"g", "f"=>"b", "c"=>"a", "a"=>"d", "g"=>"c", "b"=>"e", "d"=>"f"}
-    assert_equal 5, @solution.segments_to_digit("cdfeb", mappings)
-    assert_equal 3, @solution.segments_to_digit("fcadb", mappings)
-    assert_equal 3, @solution.segments_to_digit("cdbaf", mappings)
+    assert_equal "cagedb".chars.sort.join, numbers[0]
+    assert_equal "ab".chars.sort.join, numbers[1]
+    assert_equal "gcdfa".chars.sort.join, numbers[2]
+    assert_equal "fbcad".chars.sort.join, numbers[3]
+    assert_equal "eafb".chars.sort.join, numbers[4]
+    assert_equal "cdfbe".chars.sort.join, numbers[5]
+    assert_equal "cdfgeb".chars.sort.join, numbers[6]
+    assert_equal "dab".chars.sort.join, numbers[7]
+    assert_equal "acedgfb".chars.sort.join, numbers[8]
+    assert_equal "cefabd".chars.sort.join, numbers[9]
   end
 
   def test_process_output
