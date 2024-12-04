@@ -13,7 +13,62 @@ module Year2021
       [template, rules]
     end
 
+    def print_pairs(label, pairs)
+      puts label
+      p pairs.reject { |k,v| v.zero? }
+    end
+
     def part1(input, steps)
+      template, rules = parse_input(input)
+
+      pairs = { }
+      rules.keys.each do |rule|
+        pairs[rule.chars] = 0
+      end
+
+      template.each_cons(2) do |pair|
+        pairs[pair] += 1
+      end
+
+      steps.times do |step|
+        puts
+        puts "Step: #{step}"
+        new_pairs = Hash.new { |h, k| h[k] = 0 }
+
+        pairs.reject { |_, v| v.zero? }.each do |pair, count|
+          insert = rules[pair.join]
+          # byebug
+          new_pairs[pair] -= 1
+          new_pairs[[pair.first, insert]] += 1
+          new_pairs[[insert, pair.last]] += 1
+        end
+
+        puts "After Insert"
+        print_pairs("Pairs", pairs)
+        print_pairs("New Pairs", new_pairs)
+
+        new_pairs.each do |pair, count|
+          pairs[pair] += count
+        end
+        puts "After updates"
+        print_pairs("Pairs", pairs)
+        puts
+      end
+
+      chars = Hash.new { |h, k| h[k] = 0 }
+      pairs.each do |pair, count|
+        chars[pair.first] += count
+        chars[pair.last] += count
+      end
+
+      p chars
+      mce = chars.values.max
+      lce = chars.values.min
+
+      mce - lce
+    end
+
+    def part2(input, steps)
       template, rules = parse_input(input)
 
       steps.times do
@@ -34,9 +89,6 @@ module Year2021
       lce = template.tally.values.min
 
       mce - lce
-    end
-
-    def part2(input, steps)
     end
   end
 end
