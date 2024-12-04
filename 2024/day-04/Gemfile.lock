@@ -1,0 +1,18 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    awesome_print (1.9.2)
+    byebug (11.1.3)
+    minitest (5.25.2)
+
+PLATFORMS
+  arm64-darwin-23
+  ruby
+
+DEPENDENCIES
+  awesome_print
+  byebug
+  minitest
+
+BUNDLED WITH
+   2.5.20
