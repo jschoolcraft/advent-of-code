@@ -26,12 +26,12 @@ class TestDay05 < Minitest::Test
     assert_equal 123, @solution.part2(rules, updates)
   end
 
-  # def test_part_2
-  #   rules = File.readlines("./input-rules.txt")
-  #   updates = File.readlines("./input-updates.txt")
+  def test_part_2
+    rules = File.readlines("./input-rules.txt")
+    updates = File.readlines("./input-updates.txt")
 
-  #   assert_equal 4242, @solution.part2(rules, updates)
-  # end
+    assert_equal 4242, @solution.part2(rules, updates)
+  end
 
   def sample_data_rules
     <<~EOF

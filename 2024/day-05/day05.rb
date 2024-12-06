@@ -10,18 +10,7 @@ module Year2024
       updates.map do |update|
         update = update.split(/,/).map(&:to_i)
 
-        valid = true
-        process = update.dup
-        while process.length > 1
-          candidate = process.shift
-
-          unless process.map { |value| rules.include?([candidate, value])}.all?
-            valid = false
-            break
-          end
-        end
-
-        if valid
+        if valid?(rules, update)
           middles << update[update.length/2]
         end
       end
@@ -37,20 +26,62 @@ module Year2024
       updates.map do |update|
         update = update.split(/,/).map(&:to_i)
 
-        valid = true
-        process = update.dup
-        while process.length > 1
-          candidate = process.shift
-
-          unless process.map { |value| rules.include?([candidate, value])}.all?
-            valid = false
-            rejects << update
-            break
-          end
+        if !valid?(rules, update)
+          rejects << update
         end
       end
 
-      rejects
+      # pp rejects
+
+      rejects.each do |update|
+        ordered = []
+
+        while update.length > 1
+          # puts "-----"
+          # puts format("Ordered: %s", ordered.inspect)
+          # puts format("Update: %s", update.inspect)
+
+          first = update.select do |value|
+            check = update.reject { |f| f == value }.zip(Array.new(update.length - 1, value))
+            # puts format("Value: %s, Check: %s", value, check.inspect)
+            check.select { |rule| rules.include?(rule) }.none?
+          end.first
+
+          # puts "First: #{first}"
+          ordered << update.delete(first)
+          # pp ordered
+        end
+
+        ordered << update.shift
+
+        # puts "---- Final ----"
+        # puts format("Ordered: %s", ordered.inspect)
+        # puts format("Update: %s", update.inspect)
+
+        middles << ordered[ordered.length/2]
+      end
+      middles.sum
+    end
+
+    def valid?(rules, update)
+      valid = true
+      update.each_with_index do |value, index|
+        check = update[index..].zip(Array.new(update.length - index + 1, value))
+        check.reject! { |f,l| f == l }
+
+        broken_rules = check.select { |rule| rules.include?(rule) }
+        if broken_rules.any?
+          valid = false
+
+          # puts "*" * 80
+          # puts "Broken rules: #{value} - #{broken_rules}"
+          # pp update
+          # puts "*" * 80
+        end
+
+        # rules.include?([update.first, value])
+      end
+      valid
     end
   end
 end
