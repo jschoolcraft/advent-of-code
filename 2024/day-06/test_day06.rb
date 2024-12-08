@@ -48,17 +48,17 @@ class TestDay06 < Minitest::Test
     assert_equal 5067, @solution.part1(input)
   end
 
-  # def test_sample_part_2
-  #   input = sample_data
+  def test_sample_part_2
+    input = sample_data
 
-  #   assert_equal 4242, @solution.part2(input.split(/\n/))
-  # end
+    assert_equal 6, @solution.part2(input.split(/\n/))
+  end
 
-  # def test_part_2
-  #   input = File.readlines("./input.txt")
+  def test_part_2
+    input = File.readlines("./input.txt")
 
-  #   assert_equal 4242, @solution.part2(input)
-  # end
+    assert_equal 4242, @solution.part2(input)
+  end
 
   def sample_data
     <<~EOF
