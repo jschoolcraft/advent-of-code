@@ -5,7 +5,7 @@ module Year2024
     def part1(input)
       stones = input.split(" ").map(&:to_i)
       25.times do
-        stones = blink(stones)
+        stones = stones.each_slice(1000).map { |st| blink(st) }.flatten
       end
       stones.size
     end
@@ -23,7 +23,13 @@ module Year2024
     end
 
     def part2(input)
-      4242
+      stones = input.split(" ").map(&:to_i)
+      75.times do |i|
+        puts format("%s - stones: %s", i + 1, stones.size)
+        # stones = blink(stones)
+        stones = stones.each_slice(1000).map { |st| blink(st) }.flatten
+      end
+      stones.size
     end
   end
 end
